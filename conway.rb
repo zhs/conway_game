@@ -16,9 +16,10 @@ test_map = ['00000000000000000000',
             '00000000000000000000',
             '00000000000000000000']
 
-field = Field.new(test_map)
-cell = Cell.new(field)
+# field = Field.new(test_map)
+# cell = Cell.new(field)
 
-# we can use test_map or load map from file
-field.load_map
-cell.show_gen(10)
+# # we can use test_map or load map from file
+# field.load_map
+# cell.show_gen(10)
+

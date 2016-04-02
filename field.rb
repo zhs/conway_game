@@ -1,26 +1,27 @@
 class Field
-  def initialize(map = default_map_size)
+  def initialize(map = load_map)
     @map = map
   end
 
-  def default_map_size(size = 10)
-    @map = Array.new(size, '0' * size)
+  def default_map_size(cols, rows)
+    @map = Array.new(rows, '0' * cols)
   end
 
   def source
-    @map
+    @map 
   end
 
   def load_map
     file = File.open('conway.map', 'r')
-    @map.clear
+    @map ||= []
     file.each { |line| @map << line }
     file.close
+    @map
   end
 
-  def create_empty_map(size = 50)
-    file = File.open('conway.map', 'w+')
-    default_map_size(size).each { |row| file.puts row }
+  def create_empty_map(cols = 64, rows = 48)
+    file = File.open('conway.map', 'w+')    
+    default_map_size(cols, rows).each { |row| file.puts(row) }
     file.close
   end
 end
