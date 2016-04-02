@@ -15,9 +15,10 @@ class GameWin < Gosu::Window
     @cols = width/10
     @row_height = height/@rows
     @col_width = width/@cols
-
+    @gen = 0
     @field = Field.new
     @cell = Cell.new(@field)
+    @font = Gosu::Font.new(20)
   end
 
   def update
@@ -35,13 +36,15 @@ class GameWin < Gosu::Window
         end
       end
     end
+    @gen += 1
+    @font.draw("Generations: #{@gen}", 10, 10, 0, 1.0, 1.0, 0xff_5e5e5e)
   end
 
   def drawq(ic, ir, status)
     draw_quad(ic * @col_width, ir * @row_height, status,
-                    ic * @col_width + (@col_width - 1), ir * @row_height, status,
-                    ic * @col_width + (@col_width - 1), ir * @row_height + (@row_height - 1), status,
-                    ic * @col_width, ir * @row_height + (@row_height - 1), status)
+              ic * @col_width + (@col_width - 1), ir * @row_height, status,
+              ic * @col_width + (@col_width - 1), ir * @row_height + (@row_height - 1), status,
+              ic * @col_width, ir * @row_height + (@row_height - 1), status)
     
   end
 
