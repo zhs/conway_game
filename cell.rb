@@ -1,6 +1,6 @@
 class Cell
-  def initialize(map = Field.new)
-    @map = map.source
+  def initialize(map)
+    @map = map
   end
 
   def live?(x, y)
@@ -45,24 +45,7 @@ class Cell
     @map = tmp_map
   end
 
-  def show_gen(n)
-    # show 1st gen
-    @map.each(&output)
-    refresh
-
-    n.times do
-      generation_next.each(&output)
-      refresh
-    end
-  end
-
   def output
     -> (x) { puts x.tr('0', ' ').tr('1', '*') }
-  end
-
-  def refresh(sec = 0.2)
-    puts '-' * @map[0].length
-    sleep sec
-    system 'clear'
   end
 end

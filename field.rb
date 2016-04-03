@@ -1,6 +1,6 @@
 class Field
-  def initialize(map = load_map)
-    @map = map
+  def initialize
+    load_map
   end
 
   def default_map_size(cols, rows)
@@ -17,6 +17,15 @@ class Field
     file.each { |line| @map << line }
     file.close
     @map
+  end
+
+  def rand_start(cols = 64, rows = 48)
+    # @map = Array.new(rows, '0' * cols)
+    # @map.each_with_index do |row, i|
+      # random figure doesnt work
+      # row[rand(29..35)] = LIVE if i == 24
+    # end
+    # @map
   end
 
   def create_empty_map(cols = 64, rows = 48)

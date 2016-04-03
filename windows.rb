@@ -16,7 +16,9 @@ class GameWin < Gosu::Window
     @row_height = height/@rows
     @col_width = width/@cols
     @gen = 0
-    @field = Field.new
+    @field = Field.new.load_map
+    # to use random figure:
+    #@cell = Cell.new(Field.new.rand_start)
     @cell = Cell.new(@field)
     @font = Gosu::Font.new(20)
   end
@@ -51,7 +53,7 @@ class GameWin < Gosu::Window
   def button_down(id)
     case id
     when Gosu::KbSpace
-    
+      # _
     when Gosu::KbEscape
       close
     end
