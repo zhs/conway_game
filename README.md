@@ -1,3 +1,3 @@
-# Conway Game
+# Conway Life Game
 Run Windows.rb to start.
-Gosu gem required.
+"Gosu" gem is required.

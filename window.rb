@@ -1,7 +1,7 @@
 require 'gosu'
 require_relative 'conway'
 
-class GameWin < Gosu::Window
+class GameWindow < Gosu::Window
 
   def initialize(height = 640, width = 480)
     @height = height
@@ -16,10 +16,9 @@ class GameWin < Gosu::Window
     @row_height = height/@rows
     @col_width = width/@cols
     @gen = 0
-    @field = Field.new.load_map
-    # to use random figure:
-    #@cell = Cell.new(Field.new.rand_start)
-    @cell = Cell.new(@field)
+
+    @cell = Conway.new
+
     @font = Gosu::Font.new(20)
   end
 
@@ -72,4 +71,4 @@ class GameWin < Gosu::Window
 
 end
 
-GameWin.new.show
+GameWindow.new.show
