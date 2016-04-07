@@ -4,36 +4,30 @@ require_relative 'conway'
 class GameWindow < Gosu::Window
 
   def initialize(height = 640, width = 480)
-    @height = height
-    @width = width
-    super height, width, false
+    super height, width, {update_interval: 200, fullscreen: false}
     self.caption = "Conway"
     @background = Gosu::Color.new(0xffdedede)
     @alive = Gosu::Color.new(0xff121212)
     @dead = Gosu::Color.new(0xffededed)
-    @rows = height/10
-    @cols = width/10
-    @row_height = height/@rows
-    @col_width = width/@cols
+    @row_height = 10
+    @col_width = 10
     @gen = 0
-
     @cell = Conway.new
-
     @font = Gosu::Font.new(20)
   end
 
   def update
-    sleep 0.2
+    # _
   end
 
   def draw
     draw_background
-    @cell.generation_next.each_with_index do |row, ir|
+    @cell.generate_next.each_with_index do |row, ir|
       row.chars.each_with_index do |_, ic|
         if @cell.live?(ir, ic)
-          drawq(ic, ir, @alive)
+          draw_cell(ic, ir, @alive)
         else
-          drawq(ic, ir, @dead)
+          draw_cell(ic, ir, @dead)
         end
       end
     end
@@ -41,7 +35,7 @@ class GameWindow < Gosu::Window
     @font.draw("Generations: #{@gen}", 10, 10, 0, 1.0, 1.0, 0xff_5e5e5e)
   end
 
-  def drawq(ic, ir, status)
+  def draw_cell(ic, ir, status)
     draw_quad(ic * @col_width, ir * @row_height, status,
               ic * @col_width + (@col_width - 1), ir * @row_height, status,
               ic * @col_width + (@col_width - 1), ir * @row_height + (@row_height - 1), status,

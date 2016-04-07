@@ -23,7 +23,7 @@ class Conway
     i
   end
 
-  def generation_next
+  def generate_next
     tmp_map = []
     tmp_cell = ''
     @map.each_with_index do |row, ir|
