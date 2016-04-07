@@ -3,11 +3,13 @@ class Conway
     load_map
   end
 
-  LIVE = '1'
-  DEAD = '0'
+  LIVE = '1'.freeze
+  DEAD = '0'.freeze
 
   def live?(x, y)
-    unless @map[x].nil? then @map[x][y] == LIVE ? true : false end
+    unless @map[x].nil? then
+      @map[x][y] == LIVE ? true : false
+    end
   end
 
   def count(x, y)
@@ -28,24 +30,23 @@ class Conway
     tmp_cell = ''
     @map.each_with_index do |row, ir|
       row.chars.each_with_index do |_, ic|
-        if live?(ir, ic)
-          tmp_cell += if count(ir, ic).between?(2, 3)
-                        LIVE
-                      else
-                        DEAD
-                      end
-        else
-          tmp_cell += if count(ir, ic) == 3
-                        LIVE
-                      else
-                        DEAD
-                      end
-        end
+        tmp_cell += set_status(ir, ic)
       end
       tmp_map << tmp_cell
       tmp_cell = ''
     end
     @map = tmp_map
+  end
+
+  def set_status(ir, ic)
+    case count(ir, ic)
+      when 2
+        live?(ir, ic) ? LIVE : DEAD
+      when 3
+        LIVE
+      else
+        DEAD
+    end
   end
 
   def load_map
